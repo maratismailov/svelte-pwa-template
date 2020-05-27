@@ -4,8 +4,10 @@ module.exports = {
     "**/*.css",
     "**/*.png",
     "**/*.svg",
+    "**/*.ico",
     "**/*.html",
-    "**/*.js"
+    "**/*.js",
+    "**/*.json"
   ],
   "swSrc": "public/sw-src.js",
   "swDest": "public/sw.js",
