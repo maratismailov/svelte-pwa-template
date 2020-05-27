@@ -1,7 +1,5 @@
-
-
 module.exports = {
-  "globDirectory": "public/",
+  "globDirectory": "public",
   "globPatterns": [
     "**/*.css",
     "**/*.png",
@@ -9,10 +7,11 @@ module.exports = {
     "**/*.html",
     "**/*.js"
   ],
-  "swSrc": "sw-src.js",
-  "swDest": "sw.js",
+  "swSrc": "public/sw-src.js",
+  "swDest": "public/sw.js",
   "globIgnores": [
-    "../workbox-config.js"
+    "**/workbox*.js",
+    "**/**/sw.js",
+    "**/sw.js"
   ]
 };
-

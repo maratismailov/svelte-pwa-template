@@ -3,7 +3,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
-import { generateSW, injectManifest } from 'rollup-plugin-workbox';
+import { injectManifest } from 'rollup-plugin-workbox';
 
 const workboxConfig = require('./public/workbox-config.js')
 
@@ -38,37 +38,9 @@ export default {
 			dedupe: ['svelte']
 		}),
 		commonjs(),
-		// generateSW(workboxConfig, function render({ swDest, count, size }) {
-		// 	console.log(`\nCustom render! ${swDest}`);
-		// 	console.log(`Custom render! The service worker will precache ${count} URLs, totaling ${size}.\n`);
-		// }
-		// ),
-		generateSW({
-			swDest: 'public/sw.js',
-			globDirectory: 'public/',
-			globIgnores: ['public/sw.js'],
-			globPatterns: [
-				"**/*.css",
-				"**/*.png",
-				"**/*.svg",
-				"**/*.html",
-				"**/*.js"
-			]
-		},
-
-			function render({ swDest, count, size }) {
-				console.log(`\nCustom render! ${swDest}`);
-				console.log(`Custom render! The service worker will precache ${count} URLs, totaling ${size}.\n`);
-			}),
-		// injectManifest(workboxConfig),
-		injectManifest({
-			swSrc: 'public/sw-src.js',
-			swDest: 'public/sw.js',
-			globDirectory: 'public',
-			globIgnores: ['generateSW_sw.js'],
-		}),
-
-
+	
+		injectManifest(workboxConfig),
+	
 		// In dev mode, call `npm run start` once
 		// the bundle has been generated
 		!production && serve(),
